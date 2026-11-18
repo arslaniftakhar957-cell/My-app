@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'send_money.dart';
 
 void main() {
   runApp(ScorePayApp());
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFF0B3D2E), // Gahra Sabz - ScorePay
+        backgroundColor: Color(0xFF0B3D2E),
         title: Text("ScorePay", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         actions: [
           Icon(Icons.notifications, color: Colors.white),
@@ -32,7 +33,6 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Balance Card
             Container(
               margin: EdgeInsets.all(16),
               padding: EdgeInsets.all(20),
@@ -51,7 +51,14 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 16),
                   Row(
                     children: [
-                      Expanded(child: ElevatedButton(onPressed: () {}, child: Text("Send Money"))),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => SendMoneyScreen()));
+                          },
+                          child: Text("Send Money"),
+                        ),
+                      ),
                       SizedBox(width: 10),
                       Expanded(child: ElevatedButton(onPressed: () {}, child: Text("Bill Payment"))),
                     ],
@@ -59,39 +66,24 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Buttons Row 1
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _button(Icons.send, "Send Money"),
-                _button(Icons.receipt, "Bill Pay"),
-                _button(Icons.phone_android, "Easyload"),
-                _button(Icons.history, "History"),
+                _button(context, Icons.send, "Send Money"),
+                _button(context, Icons.receipt, "Bill Pay"),
+                _button(context, Icons.phone_android, "Easyload"),
+                _button(context, Icons.history, "History"),
               ],
             ),
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _button(Icons.account_balance, "Bank"),
-                _button(Icons.wallet, "Wallet"),
-                _button(Icons.bolt, "Raast"),
-                _button(Icons.person, "CNIC"),
+                _button(context, Icons.account_balance, "Bank"),
+                _button(context, Icons.wallet, "Wallet"),
+                _button(context, Icons.bolt, "Raast"),
+                _button(context, Icons.person, "CNIC"),
               ],
-            ),
-            SizedBox(height: 20),
-            ListTile(
-              leading: Icon(Icons.local_offer, color: Color(0xFF0B3D2E)),
-              title: Text("Promotions"),
-              subtitle: Text("ScorePay ki nayi offers dekhen"),
-              trailing: Icon(Icons.arrow_forward_ios, size: 14),
-            ),
-            ListTile(
-              leading: Icon(Icons.card_giftcard, color: Color(0xFF0B3D2E)),
-              title: Text("My Rewards"),
-              subtitle: Text("Cashback aur rewards"),
-              trailing: Icon(Icons.arrow_forward_ios, size: 14),
             ),
           ],
         ),
@@ -109,17 +101,24 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _button(IconData icon, String label) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 28,
-          backgroundColor: Color(0xFFE8F5E9),
-          child: Icon(icon, color: Color(0xFF0B3D2E)),
-        ),
-        SizedBox(height: 6),
-        Text(label, style: TextStyle(fontSize: 12)),
-      ],
+  Widget _button(BuildContext context, IconData icon, String label) {
+    return GestureDetector(
+      onTap: () {
+        if (label == "Send Money") {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SendMoneyScreen()));
+        }
+      },
+      child: Column(
+        children: [
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: Color(0xFFE8F5E9),
+            child: Icon(icon, color: Color(0xFF0B3D2E)),
+          ),
+          SizedBox(height: 6),
+          Text(label, style: TextStyle(fontSize: 12)),
+        ],
+      ),
     );
   }
 }
