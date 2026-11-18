@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'bank_list.dart';
+import 'wallet_list.dart';
 
 class SendMoneyScreen extends StatelessWidget {
   @override
@@ -17,7 +18,7 @@ class SendMoneyScreen extends StatelessWidget {
           SizedBox(height: 16),
           _item(context, Icons.account_balance_wallet, "ScorePay", "ScorePay account par bhejen", null),
           _item(context, Icons.account_balance, "Bank", "Kisi bhi bank account mein", BankListScreen()),
-          _item(context, Icons.wallet, "Wallet", "JazzCash, NayaPay waghera", null),
+          _item(context, Icons.wallet, "Wallet", "JazzCash, Easypaisa, NayaPay waghera", WalletListScreen()),
           _item(context, Icons.bolt, "Raast", "Raast ID par bhejen", null),
           _item(context, Icons.person, "CNIC", "CNIC par bhejen", null),
         ],
