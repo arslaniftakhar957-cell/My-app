@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'bank_list.dart';
 
 class SendMoneyScreen extends StatelessWidget {
   @override
@@ -14,17 +15,17 @@ class SendMoneyScreen extends StatelessWidget {
         children: [
           Text("Kahan bhejna hai?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           SizedBox(height: 16),
-          _item(Icons.account_balance_wallet, "ScorePay", "ScorePay account par bhejen"),
-          _item(Icons.account_balance, "Bank", "Kisi bhi bank account mein"),
-          _item(Icons.wallet, "Wallet", "JazzCash, NayaPay waghera"),
-          _item(Icons.bolt, "Raast", "Raast ID par bhejen"),
-          _item(Icons.person, "CNIC", "CNIC par bhejen"),
+          _item(context, Icons.account_balance_wallet, "ScorePay", "ScorePay account par bhejen", null),
+          _item(context, Icons.account_balance, "Bank", "Kisi bhi bank account mein", BankListScreen()),
+          _item(context, Icons.wallet, "Wallet", "JazzCash, NayaPay waghera", null),
+          _item(context, Icons.bolt, "Raast", "Raast ID par bhejen", null),
+          _item(context, Icons.person, "CNIC", "CNIC par bhejen", null),
         ],
       ),
     );
   }
 
-  Widget _item(IconData icon, String title, String sub) {
+  Widget _item(BuildContext context, IconData icon, String title, String sub, Widget? nextScreen) {
     return Card(
       child: ListTile(
         leading: CircleAvatar(
@@ -34,7 +35,11 @@ class SendMoneyScreen extends StatelessWidget {
         title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(sub),
         trailing: Icon(Icons.arrow_forward_ios, size: 14),
-        onTap: () {},
+        onTap: () {
+          if (nextScreen != null) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => nextScreen));
+          }
+        },
       ),
     );
   }
