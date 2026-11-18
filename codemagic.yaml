@@ -1,14 +1,17 @@
 workflows:
   android-workflow:
-    name: Android APK
-    max_build_duration: 60
+    name: Android Workflow
+    max_build_duration: 120
     instance_type: mac_mini_m1
     environment:
       flutter: stable
+      xcode: latest
+      cocoapods: default
     scripts:
-      - name: Get packages
+      - name: Create missing Android folder
         script: |
-          flutter packages pub get
+          flutter create . --platforms=android
+          flutter pub get
       - name: Build APK
         script: |
           flutter build apk --release
